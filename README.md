@@ -1,2 +1,2 @@
 # hybridFramework
-This is only for Selenium Web Driver - Hybrid Framework.
+This is the Selenium Hybrid Framework.
