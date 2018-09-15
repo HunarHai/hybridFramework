@@ -73,10 +73,12 @@ public class TestBase {
 	}
 	
 	
-	public static void main(String[] args) throws Exception {
+/*	
+  	public static void main(String[] args) throws Exception {
 		TestBase test= new TestBase();
 		System.out.println("Program started.");
 		test.setUpDriver(BrowserType.Chrome);
 		System.out.println("Program finished.");
 	}
+*/
 }
