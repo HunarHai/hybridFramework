@@ -46,9 +46,6 @@ local.properties
 .loadpath
 .recommenders
 
-# JDT-specific (Eclipse Java Development Tools)
-.classpath
-
 # Log file
 *.log
 
