@@ -1,5 +1,6 @@
 /target/
 /bin/
+.settings/
 
 #Project related metadata files
 .metadata/.lock
