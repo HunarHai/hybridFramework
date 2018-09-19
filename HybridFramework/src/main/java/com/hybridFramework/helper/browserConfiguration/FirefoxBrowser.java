@@ -51,7 +51,7 @@ public class FirefoxBrowser {
 			return new FirefoxDriver(cap);
 		}
 		else if(System.getProperty("os.name").contains("Mac")) {
-			System.setProperty("webdriver.gecko.driver", ResourceHelper
+			System.setProperty("webdriver.gecko.driver", ResourceHelper		//webdriver.firefox.marrionette
 					.getResourcePath("/src/main/resources/drivers/mac/geckodriver"));
 			return new FirefoxDriver(cap);
 		}
