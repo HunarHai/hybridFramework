@@ -1,6 +1,13 @@
 package com.hybridFramework.testBase;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import org.apache.log4j.Logger;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -11,6 +18,7 @@ import com.hybridFramework.helper.browserConfiguration.ChromeBrowser;
 import com.hybridFramework.helper.browserConfiguration.FirefoxBrowser;
 import com.hybridFramework.helper.browserConfiguration.IExplorerBrowser;
 import com.hybridFramework.helper.logger.LoggerHelper;
+import com.hybridFramework.helper.resource.ResourceHelper;
 
 
 /**
@@ -22,6 +30,7 @@ public class TestBase {
 	
 	public WebDriver driver;
 	private static final Logger log = LoggerHelper.getLogger(TestBase.class);
+	public static File reportDirectory;
 	
 	/**
 	 * 
@@ -81,4 +90,41 @@ public class TestBase {
 		System.out.println("Program finished.");
 	}
 */
+	
+	/**
+	 * 
+	 * @param fileName
+	 * @param driver
+	 * @return
+	 */
+	public String captureScreenshot(String fileName, WebDriver driver){
+		if(driver == null){
+			log.info("driver is null...");
+			return null;
+		}
+		if(fileName==""){
+			fileName="blank";
+		}
+		
+		File destFile = null;
+		Calendar calender = Calendar.getInstance();
+		SimpleDateFormat formater = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
+		
+		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		reportDirectory = new File(ResourceHelper.getResourcePath("/src/test/java/com/hybridFramework/screenshots/"));
+		
+		try{
+			destFile = new File(reportDirectory + "/" + fileName + "_" +formater.format(calender.getTime()) + ".png");
+			Files.copy(scrFile.toPath(), destFile.toPath());
+		//	Reporter.log("<a href='" +destFile.getAbsolutePath()+ "'> <img src='" +destFile.getAbsolutePath()+ "'height='100' width='100'/></a>");
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return destFile.toString();
+	}
+
+	
+	
 }
