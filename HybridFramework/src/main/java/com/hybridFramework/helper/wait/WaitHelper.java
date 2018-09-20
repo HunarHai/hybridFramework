@@ -2,8 +2,6 @@ package com.hybridFramework.helper.wait;
 
 import java.util.concurrent.TimeUnit;
 
-import javax.xml.ws.WebEndpoint;
-
 import org.apache.log4j.Logger;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.NoSuchElementException;
@@ -11,7 +9,6 @@ import org.openqa.selenium.NoSuchFrameException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
@@ -120,7 +117,7 @@ public class WaitHelper {
 	 */
 	@SuppressWarnings("deprecation")
 	private Wait<WebDriver> getFluentWait(int timeOutInSeconds, int pollingEveryInSeconds) {
-		Wait flWait = new FluentWait<WebDriver>(driver)
+		Wait<WebDriver> flWait = new FluentWait<WebDriver>(driver)
 				.withTimeout(timeOutInSeconds, TimeUnit.SECONDS)
 				.pollingEvery(pollingEveryInSeconds, TimeUnit.SECONDS)
 				.ignoring(NoSuchElementException.class);
