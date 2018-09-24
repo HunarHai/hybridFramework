@@ -33,6 +33,7 @@ public class PropertyReader implements IConfigReader {
 			f1 = new File(orFilePath);
 			fis = new FileInputStream(f1);
 			OR.load(fis);
+			
 			}
 		catch (FileNotFoundException e) {
 			e.printStackTrace();
