@@ -1,4 +1,4 @@
-package com;
+package com.hybridFramework.homePage;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
