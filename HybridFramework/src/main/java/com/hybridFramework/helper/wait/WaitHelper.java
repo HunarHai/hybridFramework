@@ -110,7 +110,8 @@ public class WaitHelper {
 	}
 	
 	/**
-	 * This method will give us the fluentWait object
+	 * This method will give us the 
+Wait object
 	 * @param timeOutInSeconds
 	 * @param pollingEveryInSeconds
 	 * @return
