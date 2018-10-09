@@ -34,6 +34,7 @@ import com.hybridFramework.helper.browserConfiguration.FirefoxBrowser;
 import com.hybridFramework.helper.browserConfiguration.IExplorerBrowser;
 import com.hybridFramework.helper.config.ObjectReader;
 import com.hybridFramework.helper.config.PropertyReader;
+import com.hybridFramework.helper.excel.ExcelHelper;
 import com.hybridFramework.helper.logger.LoggerHelper;
 import com.hybridFramework.helper.resource.ResourceHelper;
 import com.hybridFramework.utils.ExtentManager;
@@ -45,12 +46,13 @@ import com.hybridFramework.utils.ExtentManager;
  *
  */
 public class TestBase {
-	
-	public WebDriver driver;
+
 	private static final Logger log = LoggerHelper.getLogger(TestBase.class);
+	public static WebDriver driver;
 	public static File imageLocation;
 	public static ExtentReports extent;
 	public static ExtentTest test;
+	public ExcelHelper excelHelper;
 	
 	/**
 	 * 
@@ -76,18 +78,21 @@ public class TestBase {
 				//	get object of ChromeBrowser class
 				ChromeBrowser chrome = ChromeBrowser.class.newInstance();	// new ChromeBrowser();
 				ChromeOptions chromeOptions = chrome.getChromeOptions();
+				log.info("Chrome browser object created...");
 				return chrome.getChromeDriver(chromeOptions);
 			
 			case Firefox:
 				//	get object of FirefoxBrowser class
 				FirefoxBrowser firefox = FirefoxBrowser.class.newInstance();
 				FirefoxOptions ffOptions = firefox.getFirefoxOption();
+				log.info("Firefox browser object created...");
 				return firefox.getFirefoxDriver(ffOptions);
 
 			case Iexplorer:
 				//	get object of IExplorerBrowser class
 				IExplorerBrowser ie = IExplorerBrowser.class.newInstance();
 				InternetExplorerOptions ieOptions = ie.getIExplorerOptions();
+				log.info("IExplorer browser object created...");
 				return ie.getIExplorerDriver(ieOptions);
 			
 			default:
@@ -129,7 +134,7 @@ public class TestBase {
 		catch(Exception e){
 			e.printStackTrace();
 		}
-		
+		log.info("Screenshot image " +actualImageName+ " captured...");
 		return actualImageName;
 	}
 
@@ -154,6 +159,7 @@ public class TestBase {
 	@BeforeSuite
 	public void beforeSuite() {
 		extent = ExtentManager.getInstance();
+		log.info("ExtentManager instance created before suite...");
 	}
 		
 	/**
@@ -259,6 +265,7 @@ public class TestBase {
 	 */
 	public void getApplicationURL(String url) {
 		driver.get(url);
+	//	System.out.println(url);
 		logExtentReport("Getting application thru... " +url);
 	}
 	
@@ -360,9 +367,29 @@ public class TestBase {
 		return getLocators(PropertyReader.OR.getProperty(locator));
 	}
 	
+	/**
+	 * 
+	 * @param excelName
+	 * @param sheetName
+	 * @return
+	 */
+	public Object[][] getData(String excelName, String sheetName) {
+		
+		String excelLocation = ResourceHelper.getResourcePath("/src/main/resources/data/" +excelName);
+	//	System.out.println(excelLocation);
+		excelHelper = new ExcelHelper();
+		return excelHelper.getExcelData(excelLocation, sheetName);
+	}
 	
-	
-	
-	
+	public static void main(String[] args) throws Exception {
+		TestBase test = new TestBase();
+		PropertyReader p = new PropertyReader();
+		test.setUpDriver(p.getBrowserType());
+	//	String temp = PropertyReader.OR.getProperty("userName");
+	//	System.out.println(temp);
+		String temp1 = p.getURL();
+		test.getApplicationURL(temp1);
+		test.captureScreenshot("Temp", driver);
+	}
 	
 }
