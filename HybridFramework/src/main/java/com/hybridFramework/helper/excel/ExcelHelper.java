@@ -31,6 +31,7 @@ public class ExcelHelper {
 	 */
 	public Object[][] getExcelData(String excelLocation, String sheetName) {
 		try {
+			log.info("Reading excel object... " + excelLocation);
 			Object dataSets[][] = null;
 			File file = new File(excelLocation);
 			FileInputStream fis = new FileInputStream(file);
