@@ -18,7 +18,7 @@ public class GenericHelper {
 	 * @param ele
 	 * @return
 	 */
-	public String readValueOfElement(WebElement ele) {
+	public String readValueFromElement(WebElement ele) {
 		if(null == ele) {
 			log.info("Webelement is null.");
 			return null;
