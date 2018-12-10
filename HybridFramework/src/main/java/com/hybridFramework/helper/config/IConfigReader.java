@@ -16,5 +16,7 @@ public interface IConfigReader {
 	public String getURL();
 	public String getUserName();
 	public String getPassword();
+	public String getDbType();
+	public String getDbConnStr();
 	
 }

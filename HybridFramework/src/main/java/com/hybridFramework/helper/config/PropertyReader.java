@@ -76,7 +76,7 @@ public class PropertyReader implements IConfigReader {
 		if(System.getProperty("url")!=null){
 			return System.getProperty("url");
 		}
-		return OR.getProperty("applicationURL");
+		return OR.getProperty("appURL");
 	}
 
 	@Override
@@ -93,6 +93,16 @@ public class PropertyReader implements IConfigReader {
 			return System.getProperty("password");
 		}
 		return OR.getProperty("password");
+	}
+
+	@Override
+	public String getDbType() {
+		return OR.getProperty("database.Type");
+	}
+
+	@Override
+	public String getDbConnStr() {
+		return OR.getProperty("database.ConnectionStr");
 	}
 
 }
