@@ -28,7 +28,7 @@ public class WaitHelper {
 	 */
 	public WaitHelper(WebDriver driver) {
 		this.driver = driver;
-		log.info("WaitHelper object created...");
+		log.info("WaitHelper object: "+ this.driver.hashCode() +" created...");
 	}
 	
 	/**
@@ -37,7 +37,8 @@ public class WaitHelper {
 	 * @param unit
 	 */
 	public void setImplicitWait(long timeout, TimeUnit unit) {
-		driver.manage().timeouts().implicitlyWait(timeout, unit);
+	//	driver.manage().timeouts().implicitlyWait(timeout, unit);
+		driver.manage().timeouts().implicitlyWait(timeout, unit == null ? TimeUnit.SECONDS : unit);
 		log.info("Implicit wait has been set to " +timeout+ " second..." );
 	}
 	
@@ -47,6 +48,7 @@ public class WaitHelper {
 	 * @param pllingEveryInSeconds
 	 * @return
 	 */
+	
 	@SuppressWarnings("deprecation")
 	private WebDriverWait getWait(int timeOutInSeconds, int pllingEveryInSeconds) {
 		WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
@@ -64,9 +66,9 @@ public class WaitHelper {
 	 * @param timeOutInSeconds
 	 * @param pollingEveryInMiliSec
 	 */
-	public void WaitForElementVisibleWithPollingTime(WebElement element, int timeOutInSeconds, int pollingEveryInMiliSec){
+	public void WaitForElementVisibleWithPollingTime(WebElement element, int timeOutInSeconds, int pollingEveryInSec){
 		log.info("Waiting for :"+ element.toString() +" for: " + timeOutInSeconds +" seconds.");
-		WebDriverWait wait = getWait(timeOutInSeconds, pollingEveryInMiliSec);		
+		WebDriverWait wait = getWait(timeOutInSeconds, pollingEveryInSec);		
 		wait.until(ExpectedConditions.visibilityOf(element));
 		log.info("Element is visible now.");
 	}
@@ -110,8 +112,7 @@ public class WaitHelper {
 	}
 	
 	/**
-	 * This method will give us the 
-Wait object
+	 * This method will give us the Wait object
 	 * @param timeOutInSeconds
 	 * @param pollingEveryInSeconds
 	 * @return
@@ -138,6 +139,18 @@ Wait object
 		return element;
 	}
 	
+	/**
+	 * This method will make sure element is visible with Wait object
+	 * @param driver
+	 * @param element
+	 * @param timeOutInSeconds
+	 */
+	public void waitForElement(WebDriver driver, WebElement element, long timeOutInSeconds) {
+		log.info("Waiting for :" +element.toString()+ " till " +timeOutInSeconds+ " seconds..");
+		WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
+		wait.until(ExpectedConditions.visibilityOf(element));
+		log.info("Element found... " + element.getText());
+	}
 	
 	/**
 	 * This method will make sure the page to get load 
