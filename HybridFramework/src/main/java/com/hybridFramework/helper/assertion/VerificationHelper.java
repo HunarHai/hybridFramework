@@ -23,7 +23,7 @@ public class VerificationHelper {
 	 * @param element
 	 * @return
 	 */
-	public static boolean isDisplayed(WebElement element) {
+	public boolean isDisplayed(WebElement element) {
 		try {
 			element.isDisplayed();
 			log.info("Element is Displayed..." + element.getText());
@@ -42,7 +42,7 @@ public class VerificationHelper {
 	 * @param element
 	 * @return
 	 */
-	public static boolean isNotDisplayed(WebElement element) {
+	public boolean isNotDisplayed(WebElement element) {
 		try {
 			element.isDisplayed();
 			log.info("Element is Displayed..." + element.getText());
@@ -60,7 +60,7 @@ public class VerificationHelper {
 	 * @param element
 	 * @return
 	 */
-	public static boolean isEnabled(WebElement element) {
+	public boolean isEnabled(WebElement element) {
 		try {
 			element.isEnabled();
 			log.info("Element is Enabled..." + element.getText());
@@ -78,7 +78,7 @@ public class VerificationHelper {
 	 * @param element
 	 * @return
 	 */
-	public static boolean isNotEnabled(WebElement element) {
+	public boolean isNotEnabled(WebElement element) {
 		try {
 			element.isEnabled();
 			log.info("Element is Enabled..." + element.getText());
@@ -96,7 +96,7 @@ public class VerificationHelper {
 	 * @param element
 	 * @return
 	 */
-	public static boolean isSelected(WebElement element) {
+	public boolean isSelected(WebElement element) {
 		try {
 			element.isSelected();
 			log.info("Element is Selected..." + element.getText());
@@ -114,7 +114,7 @@ public class VerificationHelper {
 	 * @param element
 	 * @return
 	 */
-	public static boolean isNotSelected(WebElement element) {
+	public boolean isNotSelected(WebElement element) {
 		try {
 			element.isSelected();
 			log.info("Element is Selected..." + element.getText());
@@ -132,7 +132,7 @@ public class VerificationHelper {
 	 * @param element
 	 * @return
 	 */
-	public static String getText(WebElement element) {
+	public String getText(WebElement element) {
 		if(null == element) {
 			log.info("Element is null...");
 			TestBase.logExtentReport("Element is null...");
