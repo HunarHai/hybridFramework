@@ -381,6 +381,7 @@ public class TestBase {
 		return excelHelper.getExcelData(excelLocation, sheetName);
 	}
 	
+/*
 	public static void main(String[] args) throws Exception {
 		TestBase test = new TestBase();
 		PropertyReader p = new PropertyReader();
@@ -392,4 +393,5 @@ public class TestBase {
 		test.captureScreenshot("Temp", driver);
 	}
 	
+*/	
 }
