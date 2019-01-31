@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+//import com.hybridFramework.helper.javascript.JavaScriptHelper;
 import com.hybridFramework.helper.logger.LoggerHelper;
 
 public class WaitHelper {
@@ -174,7 +175,16 @@ public class WaitHelper {
 		log.info("Waiting for: " + element.getText() + " for " + timeOutInSeconds + " second");
 		WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
 		wait.until(ExpectedConditions.visibilityOf(element));
-		log.info("Element is visible now.");
+		log.info("Element " + element.getText() +" is visible now.");
 	}
+	
+/*	public void waitTillPageGetsReady() {
+		WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds)
+		wait.until(ExpectedConditions.visibilityOf(element));
+		log.info("Element found... " + element.getText());
+		
+		log.info("Waiting for page readyState as complete...");
+		new JavaScriptHelper(driver).waitTillPageIsReady();
+	}*/
 	
 }
