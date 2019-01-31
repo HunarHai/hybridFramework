@@ -164,4 +164,13 @@ public class JavaScriptHelper {
 		executeScript("history.go(0)");
 	}
 	
+	/**
+	 * This method will return if page is in complete ready state and loaded
+	 */
+/*	public void waitTillPageIsReady() {
+		log.info("Confirming that page is loaded completely...");
+		executeScript("return document.readyState").equals("complete");
+		log.info("Page is in complete readyState...");
+	}*/
+	
 }
