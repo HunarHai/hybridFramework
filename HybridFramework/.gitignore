@@ -20,6 +20,8 @@
 .metadata/version.ini
 .metadata/*
 
+#html reports
+*.html
 
 #WebDriver exe file
 chromedriver.exe
