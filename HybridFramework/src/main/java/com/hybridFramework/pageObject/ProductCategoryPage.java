@@ -26,6 +26,11 @@ public class ProductCategoryPage {
 	
 	WaitHelper waitHelper;
 	
+	public String Orange = "Orange";
+	public String Black = "Black";
+	public String Yellow = "Yellow";
+	
+	
 	@FindBy(xpath="//*[@id='layered_block_left']/p")
 	WebElement catalogTextObj;
 
@@ -35,8 +40,8 @@ public class ProductCategoryPage {
 	@FindBy(xpath = "]/div/div[2]/h5/a")
 	public WebElement sXPath;
 	
-	@FindBy(id = "productCount")
-	List<WebElement> productCount;
+	@FindBy(xpath="//*[@id='center_column']/ul/li")
+	List<WebElement> productCount;	
 
 	@FindBy(xpath = "//*[@id='center_column']/ul/li/div/div[2]/div[1]/span")
 	List<WebElement> allPriceElements;
@@ -50,6 +55,9 @@ public class ProductCategoryPage {
 	@FindBy(xpath="//*[@id='selectProductSort']")	//SortingDropDown
 	public WebElement sortBy;
 
+/*	@FindBy(xpath="//*[@id='layered_id_attribute_group_13']")
+	public String Orange;
+*/
 	
 	public ProductCategoryPage(WebDriver driver) {
 		this.driver = driver;
@@ -183,9 +191,12 @@ public class ProductCategoryPage {
 		while(itr.hasNext()){
 			String str = itr.next().getText();
 			if(str.contains("$")){
+				// To retrieve the actualPrice data excluding $ sign
 				String actualPrice = str.substring(1);
 			//	log.info(actualPrice);
+				// To parse the String 'actualPrice' data into double type
 				double d1 = Double.parseDouble(actualPrice);
+				// TypeCasting 'double' to 'int' type
 				int productPrice = (int) d1;
 				array.add(productPrice);
 			}

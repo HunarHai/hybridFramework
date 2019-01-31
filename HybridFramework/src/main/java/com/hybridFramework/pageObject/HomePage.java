@@ -1,14 +1,13 @@
 package com.hybridFramework.pageObject;
 
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import com.hybridFramework.helper.config.ObjectReader;
+import com.hybridFramework.helper.actions.ActionsHelper;
+import com.hybridFramework.helper.config.PropertyReader;
 import com.hybridFramework.helper.logger.LoggerHelper;
 import com.hybridFramework.helper.wait.WaitHelper;
 import com.hybridFramework.testBase.TestBase;
@@ -20,8 +19,6 @@ public class HomePage {
 
 	WaitHelper waitHelper;
 	
-	
-	
 	@FindBy(xpath="//*[@id='block_top_menu']/ul/li[1]/a")
 	public WebElement womenMenu;
 	
@@ -31,11 +28,16 @@ public class HomePage {
 	@FindBy(xpath="//*[@id='block_top_menu']/ul/li[3]/a")
 	public WebElement tshirtMenu;
 	
+	/**
+	 * 
+	 * @param driver
+	 */
 	public HomePage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
+		
 		waitHelper = new WaitHelper(driver);
-		waitHelper.waitForElement(driver, womenMenu, ObjectReader.reader.getExplicitWait());
+		waitHelper.waitForElement(driver, womenMenu, new PropertyReader().getExplicitWait());
 		
 		log.info("HomePage object created...");
 		TestBase.logExtentReport("Homepage object created...");
@@ -46,10 +48,9 @@ public class HomePage {
 	 * 
 	 * @param data
 	 */
-	public void mouseHover(String data) {
-		log.info("Mouse hovering on: " + data);
-		Actions action = new Actions(driver);
-		action.moveToElement(driver.findElement(By.xpath("//*[contains(text(),'"+data+"']"))).build().perform();
+	public void mouseHover(String toElement) {
+		log.info("Mouse hovering on: " + toElement);
+		new ActionsHelper(driver).mouseHover(toElement);
 	}
 	
 	/**
@@ -57,9 +58,9 @@ public class HomePage {
 	 * @param data
 	 * @return
 	 */
-	public ProductCategoryPage clickOnItem(String data) {
-		log.info("Clicking on: " + data);
-		driver.findElement(By.xpath("//*[contains(text(),'"+data+"']")).click();
+	public ProductCategoryPage clickOnItem(String toElement) {
+		log.info("Clicking on: " + toElement);
+		new ActionsHelper(driver).mouseClick(toElement);
 		return new ProductCategoryPage(driver);
 	}
 	
@@ -70,8 +71,8 @@ public class HomePage {
 	 */
 	public ProductCategoryPage clickOnMenu(WebElement element) {
 		log.info("Clicking on: " +element.getText());
-		element.click();
+		//	element.click();
+		new ActionsHelper(driver).mouseHoverAndClick(element, element);
 		return new ProductCategoryPage(driver);
 	}
-	
 }
