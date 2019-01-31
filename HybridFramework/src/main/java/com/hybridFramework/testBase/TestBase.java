@@ -265,7 +265,7 @@ public class TestBase {
 	 */
 	public void getApplicationURL(String url) {
 		driver.get(url);
-	//	System.out.println(url);
+		log.info("Getting application thru... " +url);
 		logExtentReport("Getting application thru... " +url);
 	}
 	
